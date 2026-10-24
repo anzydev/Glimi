@@ -1,0 +1,388 @@
+/* ============================================================
+   GLIMI — CLAYMORPHISM DESIGN SYSTEM
+   Soft, inflated forms with broad light from upper left
+   Font: Instrument Sans
+   ============================================================ */
+
+/* ── Authoritative Design Tokens from design.md ── */
+:root {
+  /* Colors */
+  --dp-color-ground:          #f1f2fa;
+  --dp-color-ink:             #383139;
+  --dp-color-ink-secondary:   #48404b;
+  --dp-color-accent:          #f6a3ca; /* pink cushion */
+  --dp-color-surface-support: #c0efdc; /* pastel mint */
+  --dp-color-surface-compare: #ded0f9; /* pastel lavender */
+  --dp-color-surface-warm:    #f9e7a8; /* pastel butter-yellow */
+  --dp-color-surface-cool:    #c5e5fb; /* pastel pale-blue */
+  --dp-color-surface:         #fffdf7; /* cream surface */
+
+  /* Typography */
+  --dp-typography-face:            var(--font-instrument, "Instrument Sans"), -apple-system, BlinkMacSystemFont, sans-serif;
+  --dp-typography-mono-face:       var(--font-mono, "JetBrains Mono"), monospace;
+  --dp-typography-body:            16px;
+  --dp-typography-small:           15px;
+  --dp-typography-metadata:        13px;
+  --dp-typography-caption:         12px;
+  --dp-typography-reading-leading: 1.55;
+  --dp-typography-emphasis:        700;
+
+  /* Spacing */
+  --dp-spacing-gap:           24px;
+  --dp-spacing-gap-compact:   20px;
+  --dp-spacing-paragraph-gap: 18px;
+  --dp-spacing-page:          24px;
+  --dp-spacing-section:       48px;
+
+  /* Radii */
+  --dp-radius-surface:    38px;
+  --dp-radius-tray:       70px;
+  --dp-radius-control:    999px;
+  --dp-radius-disclosure: 25px;
+
+  /* Focus & Motion */
+  --dp-border-focus-width: 3px;
+  --dp-motion-interaction: 180ms;
+
+  /* ── Clay 3D Molded Shading Tokens (Light from upper-left) ── */
+  --clay-shadow-cream:
+    8px 16px 28px rgba(56, 49, 57, 0.07),
+    2px 4px 8px rgba(56, 49, 57, 0.04),
+    inset 3px 3px 6px rgba(255, 255, 255, 0.95),
+    inset -3px -3px 8px rgba(56, 49, 57, 0.08);
+
+  --clay-shadow-pink:
+    8px 18px 32px rgba(214, 114, 159, 0.28),
+    2px 5px 10px rgba(214, 114, 159, 0.15),
+    inset 3px 3px 6px rgba(255, 255, 255, 0.85),
+    inset -3px -3px 8px rgba(184, 84, 129, 0.22);
+
+  --clay-shadow-mint:
+    6px 14px 24px rgba(60, 130, 100, 0.14),
+    inset 3px 3px 6px rgba(255, 255, 255, 0.9),
+    inset -3px -3px 7px rgba(70, 140, 110, 0.15);
+
+  --clay-shadow-lavender:
+    6px 14px 24px rgba(120, 100, 170, 0.15),
+    inset 3px 3px 6px rgba(255, 255, 255, 0.9),
+    inset -3px -3px 7px rgba(120, 100, 170, 0.16);
+
+  --clay-shadow-yellow:
+    6px 14px 24px rgba(170, 140, 50, 0.14),
+    inset 3px 3px 6px rgba(255, 255, 255, 0.9),
+    inset -3px -3px 7px rgba(160, 130, 40, 0.15);
+
+  --clay-shadow-blue:
+    6px 14px 24px rgba(70, 120, 170, 0.15),
+    inset 3px 3px 6px rgba(255, 255, 255, 0.9),
+    inset -3px -3px 7px rgba(65, 115, 165, 0.16);
+
+  --clay-shadow-pill:
+    3px 6px 14px rgba(56, 49, 57, 0.10),
+    inset 2px 2px 4px rgba(255, 255, 255, 0.9),
+    inset -2px -2px 5px rgba(56, 49, 57, 0.12);
+
+  --clay-shadow-pill-pink:
+    4px 8px 18px rgba(214, 114, 159, 0.35),
+    inset 2px 2px 4px rgba(255, 255, 255, 0.9),
+    inset -2px -2px 5px rgba(160, 60, 105, 0.22);
+
+  --clay-shadow-recessed:
+    inset 3px 3px 6px rgba(56, 49, 57, 0.08),
+    inset -2px -2px 5px rgba(255, 255, 255, 0.9);
+
+  /* ── Component Backward Compatibility ── */
+  --bg-surface:                 var(--dp-color-surface);
+  --bg-surface-elevated:        var(--dp-color-surface);
+  --bg-surface-glass:           rgba(255, 253, 247, 0.95);
+  --bg-surface-glass-elevated:  var(--dp-color-surface);
+
+  --text-primary:               var(--dp-color-ink);
+  --text-secondary:             var(--dp-color-ink-secondary);
+  --text-muted:                 #68606c;
+
+  --border-subtle:              rgba(56, 49, 57, 0.08);
+  --border-medium:              rgba(56, 49, 57, 0.15);
+  --border-strong:              var(--dp-color-ink);
+  --border-accent:              var(--dp-color-accent);
+
+  --accent-teal:                var(--dp-color-ink);
+  --accent-cyan:                var(--dp-color-ink-secondary);
+  --accent-teal-muted:          var(--dp-color-surface-support);
+
+  --badge-verified:             #1f6625;
+  --badge-verified-bg:          var(--dp-color-surface-support);
+  --badge-reported:             #7a5210;
+  --badge-reported-bg:          var(--dp-color-surface-warm);
+  --badge-reported-border:      rgba(170, 140, 50, 0.2);
+  --status-danger:              #c23b5d;
+
+  --radius-sm:                  12px;
+  --radius-md:                  20px;
+  --radius-lg:                  var(--dp-radius-surface);
+  --radius-xl:                  var(--dp-radius-tray);
+  --radius-pill:                var(--dp-radius-control);
+
+  --shadow-sm:                  var(--clay-shadow-pill);
+  --shadow-md:                  var(--clay-shadow-cream);
+  --shadow-lg:                  var(--clay-shadow-cream);
+  --shadow-glow:                var(--clay-shadow-pink);
+
+  --transition-fast:            var(--dp-motion-interaction) ease;
+  --transition-normal:          240ms ease;
+}
+
+/* ── Reset & Base ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  background-color: var(--dp-color-ground);
+}
+
+body {
+  min-height: 100vh;
+  background-color: var(--dp-color-ground);
+  color: var(--dp-color-ink);
+  font-family: var(--dp-typography-face);
+  font-size: var(--dp-typography-body);
+  line-height: var(--dp-typography-reading-leading);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Focus outline: separated from the shading */
+:focus-visible {
+  outline: var(--dp-border-focus-width) solid var(--dp-color-ink) !important;
+  outline-offset: 3px !important;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ── Headings — Bold Instrument Sans with tight tracking ── */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--dp-typography-face);
+  color: var(--dp-color-ink);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+}
+
+h1 { font-size: clamp(2.4rem, 5vw, 4.2rem); }
+h2 { font-size: clamp(1.8rem, 3.5vw, 2.6rem); }
+h3 { font-size: clamp(1.25rem, 2.2vw, 1.7rem); }
+h4 { font-size: 1.15rem; }
+
+p {
+  font-family: var(--dp-typography-face);
+  font-size: var(--dp-typography-body);
+  color: var(--dp-color-ink-secondary);
+  line-height: var(--dp-typography-reading-leading);
+}
+
+code, pre, .font-mono {
+  font-family: var(--dp-typography-mono-face);
+  font-size: 0.875rem;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: var(--dp-color-ground); }
+::-webkit-scrollbar-thumb {
+  background: #d5d7e8;
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #b5b8cf;
+}
+
+/* ── Reduced Motion ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+    transform: none !important;
+  }
+}
+
+/* ============================================================
+   CLAYMORPHISM SURFACES & CONTAINERS (from design.md)
+   ============================================================ */
+
+/* Shared cream tray (radius 70px) */
+.clay-tray {
+  background: var(--dp-color-surface);
+  border-radius: var(--dp-radius-tray);
+  box-shadow: var(--clay-shadow-cream);
+  padding: 48px;
+  position: relative;
+}
+
+/* Pink lead cushion (radius 38px) */
+.clay-cushion-pink {
+  background: var(--dp-color-accent);
+  border-radius: var(--dp-radius-surface);
+  box-shadow: var(--clay-shadow-pink);
+  padding: 36px;
+  color: var(--dp-color-ink);
+}
+
+/* Mint support cushion */
+.clay-cushion-mint {
+  background: var(--dp-color-surface-support);
+  border-radius: var(--dp-radius-surface);
+  box-shadow: var(--clay-shadow-mint);
+  padding: 28px;
+  color: var(--dp-color-ink);
+}
+
+/* Lavender compare cushion / decision tray */
+.clay-cushion-lavender {
+  background: var(--dp-color-surface-compare);
+  border-radius: var(--dp-radius-surface);
+  box-shadow: var(--clay-shadow-lavender);
+  padding: 36px;
+  color: var(--dp-color-ink);
+}
+
+/* Butter-yellow warm cushion */
+.clay-cushion-yellow {
+  background: var(--dp-color-surface-warm);
+  border-radius: var(--dp-radius-surface);
+  box-shadow: var(--clay-shadow-yellow);
+  padding: 28px;
+  color: var(--dp-color-ink);
+}
+
+/* Pale-blue cool cushion */
+.clay-cushion-blue {
+  background: var(--dp-color-surface-cool);
+  border-radius: var(--dp-radius-surface);
+  box-shadow: var(--clay-shadow-blue);
+  padding: 28px;
+  color: var(--dp-color-ink);
+}
+
+/* Cream standard cushion / card */
+.clay-cushion-cream {
+  background: var(--dp-color-surface);
+  border-radius: var(--dp-radius-surface);
+  box-shadow: var(--clay-shadow-cream);
+  padding: 28px;
+  color: var(--dp-color-ink);
+  transition: transform var(--dp-motion-interaction) ease, box-shadow var(--dp-motion-interaction) ease;
+}
+
+.clay-cushion-cream:hover {
+  transform: translateY(-2px);
+}
+
+/* Inset well for images / media */
+.clay-inset-well {
+  background: #edeef6;
+  border-radius: 24px;
+  box-shadow: var(--clay-shadow-recessed);
+  padding: 16px;
+  overflow: hidden;
+}
+
+/* Thick Pill Button */
+.clay-btn {
+  font-family: var(--dp-typography-face);
+  font-weight: 700;
+  border-radius: var(--dp-radius-control);
+  border: none;
+  cursor: pointer;
+  outline: none;
+  transition: transform var(--dp-motion-interaction) ease,
+              box-shadow var(--dp-motion-interaction) ease;
+}
+
+.clay-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+}
+
+.clay-btn:active:not(:disabled) {
+  transform: translateY(2px) scale(0.98);
+}
+
+/* AI Pill Badge */
+.ai-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--dp-typography-metadata);
+  font-family: var(--dp-typography-face);
+  font-weight: 700;
+  color: var(--dp-color-ink);
+  background: var(--dp-color-surface-compare);
+  box-shadow: var(--clay-shadow-pill);
+  padding: 5px 14px;
+  border-radius: var(--dp-radius-control);
+}
+
+/* Container */
+.container-max {
+  max-width: 1180px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--dp-spacing-page);
+  padding-right: var(--dp-spacing-page);
+}
+
+/* Shimmer placeholder */
+.shimmer-placeholder {
+  background: linear-gradient(
+    90deg,
+    #e8eaf4 25%,
+    #f4f5fc 50%,
+    #e8eaf4 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.8s infinite linear;
+  border-radius: 16px;
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position:  200% 0; }
+}
+
+/* Responsive adjustments */
+@media (max-width: 1100px) {
+  .clay-tray { border-radius: 48px; padding: 36px 28px; }
+}
+
+@media (max-width: 760px) {
+  .clay-tray { border-radius: 36px; padding: 24px 18px; }
+  .clay-cushion-pink,
+  .clay-cushion-lavender { border-radius: 28px; padding: 24px; }
+  .clay-cushion-cream,
+  .clay-cushion-mint,
+  .clay-cushion-yellow,
+  .clay-cushion-blue { border-radius: 24px; padding: 20px; }
+  .desktop-nav { display: none !important; }
+  .mobile-menu-btn { display: flex !important; }
+}
+
+/* Visually hidden but available to assistive technology */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
