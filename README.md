@@ -6,8 +6,9 @@ Glimi helps developers discover collaborators through public GitHub evidence, st
 
 ## Live Deployment
 
+- **Production URL**: [https://glimi.vercel.app](https://glimi.vercel.app)
 - **One-Click Deploy**: Click the **Deploy with Vercel** button above to automatically fork and deploy Glimi to your own Vercel account with pre-configured environment variable prompts.
-- **Vercel Project Setup**: When deploying via Vercel, link your GitHub repository and supply your `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, and `SUPABASE_SERVICE_ROLE_KEY`.
+- **Continuous Deployment**: Connected to `anzydev/Glimi` (`main` branch) with automated preview and production deployments.
 
 ## Stack
 
