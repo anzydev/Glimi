@@ -1,7 +1,3 @@
-# Glimi
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fanzydev%2FGlimi&env=NEXT_PUBLIC_SUPABASE_URL,NEXT_PUBLIC_SUPABASE_ANON_KEY,SUPABASE_SERVICE_ROLE_KEY,GITHUB_CLIENT_ID,GITHUB_CLIENT_SECRET&envDescription=Supabase%20and%20GitHub%20OAuth%20Credentials&project-name=glimi&repository-name=glimi)
-
 Glimi helps developers discover collaborators through public GitHub evidence, stated collaboration intent, and context-first invitations. It does not sell "verified expertise": repository languages and topics are shown as observed metadata, and self-reported skills are labeled separately.
 
 ## Live Deployment
