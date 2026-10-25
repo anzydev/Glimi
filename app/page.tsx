@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { AppShell } from "@/components/layout/AppShell";
 import { Button } from "@/components/ui/Button";
@@ -21,6 +21,27 @@ import { GithubIcon } from "@/components/icons/BrandIcons";
 
 export default function HomePage() {
   const [openDisclosure, setOpenDisclosure] = useState<number | null>(0);
+  const [isExchangingCode, setIsExchangingCode] = useState(false);
+  const [authError, setAuthError] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      const code = params.get("code");
+      if (code) {
+        setIsExchangingCode(true);
+        window.location.href = `/auth/callback${window.location.search}`;
+        return;
+      }
+
+      const authStatus = params.get("auth");
+      if (authStatus === "failed") {
+        setAuthError("GitHub authentication was canceled or failed. Please try again.");
+      } else if (authStatus === "unconfigured") {
+        setAuthError("Supabase authentication is not configured yet.");
+      }
+    }
+  }, []);
 
   const handleGitHubSignIn = async () => {
     await signInWithGitHub("/discover");
@@ -30,8 +51,101 @@ export default function HomePage() {
     setOpenDisclosure((prev) => (prev === index ? null : index));
   };
 
+  if (isExchangingCode) {
+    return (
+      <AppShell>
+        <div
+          style={{
+            minHeight: "60vh",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            padding: "40px 20px",
+          }}
+        >
+          <div
+            className="clay-cushion-lavender"
+            style={{
+              padding: "40px 48px",
+              textAlign: "center",
+              maxWidth: "460px",
+            }}
+          >
+            <div
+              style={{
+                width: "52px",
+                height: "52px",
+                borderRadius: "50%",
+                backgroundColor: "#ffffff",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                margin: "0 auto 20px auto",
+                boxShadow: "var(--clay-shadow-pill)",
+              }}
+            >
+              <Sparkles size={24} color="var(--dp-color-ink)" />
+            </div>
+            <h2
+              style={{
+                fontSize: "1.4rem",
+                fontWeight: 800,
+                marginBottom: "8px",
+                color: "var(--dp-color-ink)",
+              }}
+            >
+              Completing GitHub Sign-In...
+            </h2>
+            <p
+              style={{
+                fontSize: "0.95rem",
+                color: "var(--dp-color-ink-secondary)",
+                margin: 0,
+              }}
+            >
+              Exchanging your authentication token and taking you to your workspace.
+            </p>
+          </div>
+        </div>
+      </AppShell>
+    );
+  }
+
   return (
     <AppShell>
+      {authError && (
+        <div className="container-max" style={{ paddingTop: "16px" }}>
+          <div
+            className="clay-cushion-pink"
+            style={{
+              padding: "14px 20px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              gap: "12px",
+              marginBottom: "12px",
+            }}
+          >
+            <span style={{ fontSize: "0.95rem", fontWeight: 600, color: "var(--dp-color-ink)" }}>
+              {authError}
+            </span>
+            <button
+              type="button"
+              onClick={() => setAuthError(null)}
+              style={{
+                border: "none",
+                background: "transparent",
+                fontSize: "0.9rem",
+                fontWeight: 700,
+                color: "var(--dp-color-ink)",
+                cursor: "pointer",
+              }}
+            >
+              ✕
+            </button>
+          </div>
+        </div>
+      )}
       {/* ── 1. Hero: Clear Headline Explaining What Glimi Does + Problem Context ── */}
       <section style={{ paddingTop: "24px", paddingBottom: "36px" }}>
         <div className="container-max">
