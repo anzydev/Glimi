@@ -60,6 +60,9 @@ export async function GET(request: NextRequest) {
   };
 
   if (error || !session?.user) {
+    if (error) {
+      console.error("Supabase exchangeCodeForSession failed:", error.message);
+    }
     return finish("/?auth=failed");
   }
 
