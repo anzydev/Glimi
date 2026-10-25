@@ -4,7 +4,9 @@ import { NextResponse, type NextRequest } from "next/server";
 export async function proxy(request: NextRequest) {
   const code = request.nextUrl.searchParams.get("code");
   if (code && !request.nextUrl.pathname.startsWith("/auth/callback")) {
-    const callbackUrl = new URL("/auth/callback", request.url);
+    const rawAppUrl = process.env.NEXT_PUBLIC_APP_URL?.trim();
+    const appUrl = rawAppUrl && rawAppUrl.length > 0 ? rawAppUrl : request.url;
+    const callbackUrl = new URL("/auth/callback", appUrl);
     request.nextUrl.searchParams.forEach((val, key) => {
       callbackUrl.searchParams.set(key, val);
     });
