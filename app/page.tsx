@@ -37,8 +37,10 @@ export default function HomePage() {
       const authStatus = params.get("auth");
       if (authStatus === "failed") {
         setAuthError("GitHub authentication was canceled or failed. Please try again.");
+        window.history.replaceState({}, "", window.location.pathname);
       } else if (authStatus === "unconfigured") {
         setAuthError("Supabase authentication is not configured yet.");
+        window.history.replaceState({}, "", window.location.pathname);
       }
     }
   }, []);
