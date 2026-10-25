@@ -16,18 +16,17 @@ export async function GET(request: NextRequest) {
   const code = requestUrl.searchParams.get("code");
   const next = safeRedirectPath(requestUrl.searchParams.get("next"), "/discover");
 
+  const rawAppUrl = process.env.NEXT_PUBLIC_APP_URL?.trim();
+  const appUrl = rawAppUrl && rawAppUrl.length > 0 ? rawAppUrl : requestUrl.origin;
+
   if (!code) {
-    return NextResponse.redirect(
-      new URL("/?auth=failed", requestUrl.origin)
-    );
+    return NextResponse.redirect(new URL("/?auth=failed", appUrl));
   }
 
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
   if (!supabaseUrl || !supabaseAnonKey) {
-    return NextResponse.redirect(
-      new URL("/?auth=unconfigured", requestUrl.origin)
-    );
+    return NextResponse.redirect(new URL("/?auth=unconfigured", appUrl));
   }
 
   const pendingCookies: PendingCookie[] = [];
@@ -52,7 +51,7 @@ export async function GET(request: NextRequest) {
   } = await supabase.auth.exchangeCodeForSession(code);
 
   const finish = (path: string) => {
-    const response = NextResponse.redirect(new URL(path, requestUrl.origin));
+    const response = NextResponse.redirect(new URL(path, appUrl));
     for (const cookie of pendingCookies) {
       response.cookies.set(cookie.name, cookie.value, cookie.options);
     }
