@@ -1,6 +1,6 @@
 Glimi helps developers discover collaborators through public GitHub evidence, stated collaboration intent, and context-first invitations. It does not sell "verified expertise": repository languages and topics are shown as observed metadata, and self-reported skills are labeled separately.
 
-## Live Deployment
+## Live Deployment Project
 
 - **Production URL**: [https://glimi.vercel.app](https://glimi.vercel.app)
 - **PDF Link**: https://docs.google.com/presentation/d/1aWll30U19KY_NwYx9h_U-G9PboYYaPCm/edit?usp=sharing&ouid=117845223098027552543&rtpof=true&sd=true
