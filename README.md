@@ -25,7 +25,7 @@ Glimi helps developers discover collaborators through public GitHub evidence, st
 
 Create `.env.local`:
 
-```bash
+```
 NEXT_PUBLIC_SUPABASE_URL=
 NEXT_PUBLIC_SUPABASE_ANON_KEY=
 SUPABASE_SERVICE_ROLE_KEY=
@@ -95,10 +95,12 @@ Open `http://localhost:3000`.
 npm run dev        # development server
 npm run build      # production build
 npm run start      # production server
-npm run lint       # ESLint
+npm run lint      # ESLint
 npm run typecheck  # TypeScript
 npm test           # unit tests (Node test runner)
 ```
+
+For development workflow and the checks to run before submitting changes, see [CONTRIBUTING.md](./CONTRIBUTING.md).
 
 ## Key Routes
 
